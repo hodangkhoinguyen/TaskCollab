@@ -1,17 +1,16 @@
-import mongoose from 'mongoose';
-import dotenv from "dotenv";
-import app from "./server.js";
+import express from 'express';
+import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
-dotenv.config();
+const app = express();
+const corsOptions = {
+    origin: true, //included origin as true
+    credentials: true, //included credentials as true
+};
 
-const PORT = process.env.PORT || 8000;
-mongoose.set('strictQuery', true);
-mongoose.connect(process.env.DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(
-        app.listen(PORT, () => {
-            console.log(`listening on port ${PORT}`);
-        })
-    )
-    .catch((err) => {
-        console.log(`cannot connected, error happened: ${err}`);
-    })
+app.use(cors(corsOptions));
+app.use(cookieParser());
+app.use(express.json());
+
+app.use("*", (req, res) => res.status(404).json({ err: "URL not found" }));
+export default app;
