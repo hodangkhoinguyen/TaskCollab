@@ -1,5 +1,6 @@
 
 import React, { useState } from 'react';
+import './signup.css'
 import { useHistory } from 'react-router-dom';
 
 const SignupPage = () => {
