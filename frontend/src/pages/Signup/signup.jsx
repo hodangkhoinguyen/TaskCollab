@@ -1,12 +1,12 @@
 
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-
+// import { useHistory } from 'react-router-dom';
+import './signup.css'
 const SignupPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  // const history = useHistory();
 
   const handleNameChange = (event) => {
     setName(event.target.value);
@@ -17,14 +17,23 @@ const SignupPage = () => {
   };
 
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+   setPassword(event.target.value);
+  };
+
+const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Perform signup logic here
-    // You can access the entered name, email, and password using the 'name', 'email', and 'password' variables
-    history.push('/main')
+    if (password !== confirmPassword) {
+      // Display error message or take other action
+      console.log('Passwords do not match');
+    } else {
+      // Perform signup logic here
+      // You can access the entered name, email, and password using the 'name', 'email', and 'password' variables
+      console.log('Signup successful');
+    }
   };
 
   return (
@@ -38,6 +47,7 @@ const SignupPage = () => {
               type="text"
               value={name}
               onChange={handleNameChange}
+              placeholder="Name"
               required
             />
           </div>
@@ -47,15 +57,25 @@ const SignupPage = () => {
               type="email"
               value={email}
               onChange={handleEmailChange}
+              placeholder="Email"
               required
             />
           </div>
           <div>
-            <label>Password:</label>
+            <label>Create Password:</label>
             <input
               type="password"
               value={password}
               onChange={handlePasswordChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Confirm Password:</label>
+            <input
+              type="password"
+              value={confirmPassword}
+              onChange={handleConfirmPasswordChange}
               required
             />
           </div>

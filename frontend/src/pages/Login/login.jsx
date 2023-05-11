@@ -1,5 +1,7 @@
 
 import React, { useState } from 'react';
+
+import './login.css'
 //import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -22,6 +24,10 @@ const LoginPage = () => {
     // navigate.push('/main');
   };
 
+  const handleGoogleLogin = () => {
+    // perform Google login logic here
+  };
+
   return (
     <div className="login-page">
       <div className="login-form">
@@ -33,6 +39,7 @@ const LoginPage = () => {
               type="email"
               value={email}
               onChange={handleEmailChange}
+              placeholder="Email"
               required
             />
           </div>
@@ -42,11 +49,14 @@ const LoginPage = () => {
               type="password"
               value={password}
               onChange={handlePasswordChange}
+              placeholder="Password"
               required
             />
           </div>
           <button type="submit">Login</button>
         </form>
+        <p>Or log in with your Google account:</p>
+       <button onClick={handleGoogleLogin}>Log In with Google</button>
         <p>Don't have an account? <a href="/signup">Sign up</a></p>
       </div>
     </div>
