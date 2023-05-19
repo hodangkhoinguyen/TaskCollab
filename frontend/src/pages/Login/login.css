@@ -61,3 +61,8 @@
     .login-form a:hover {
       text-decoration: underline;
     }
+
+    .google-login-btn {
+      background-color: #ff4b5c;
+      color: #fff;
+    }
