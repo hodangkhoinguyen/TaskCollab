@@ -7,6 +7,10 @@ const Comment = mongoose.model('Comment',
             type: mongoose.Schema.Types.ObjectId,
             ref: "User"
         },
+        task: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Task"
+        },
         content: String,
         files: [String]
     })

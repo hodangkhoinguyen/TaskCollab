@@ -9,7 +9,7 @@ const db = {};
 db.mongoose = mongoose;
 db.comment = Comment;
 db.group = Group;
-db.Task = Task;
+db.task = Task;
 db.user = User;
 
 export default db;
