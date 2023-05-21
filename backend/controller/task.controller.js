@@ -20,6 +20,7 @@ async function createTask(req, res, next) {
             dateCreated: new Date(),
             title: req.body.title,
             description: req.body.description || "",
+            status: "Pending",
             group: groupId,
             comments: []
         });
@@ -103,11 +104,13 @@ async function updateTask(req, res, next) {
         const currTask = await Task.findById(taskId);
         const title = req.body.title || currTask.title;
         const description = req.body.description || currTask.description;
+        const status = req.body.status || currTask.status;
 
         await Task.findByIdAndUpdate(taskId, {
             $set: {
                 title: title,
-                description: description
+                description: description,
+                status: status
             }
         });
 
@@ -153,7 +156,6 @@ async function canModifyTask(taskId, userId) {
     }
     return canModifyGroup(currTask.group.toString(), userId);
 }
-
 
 const taskCtrl = {
     createTask,

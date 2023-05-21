@@ -10,5 +10,6 @@ router.route("/").post(auth.verifyToken, groupCtrl.createGroup)
 
 router.route("/getGroupById").post(auth.verifyToken, groupCtrl.getGroupById);
 router.route("/getGroupByUser").post(auth.verifyToken, groupCtrl.getGroupByUser);
+router.route("/addMemberByEmail").post(auth.verifyToken, groupCtrl.addMemberByEmail);
 
 export default router;

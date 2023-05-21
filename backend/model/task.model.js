@@ -5,6 +5,7 @@ const Task = mongoose.model('Task',
         dateCreated: Date,
         title: String,
         description: String,
+        status: String,
         group: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Group"
