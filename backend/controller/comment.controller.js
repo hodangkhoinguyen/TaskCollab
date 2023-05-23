@@ -40,7 +40,7 @@ async function createComment(req, res, next) {
 async function getCommentById(req, res, next) {
     try {
         const userId = req.userId;
-        const commentId = req.body.commentId;
+        const commentId = req.params.commentId;
         const canView = await canModifyComment(commentId, userId);
         if (!canView) {
             res.status(401).json({ message: "Not authorized for this comment" });
@@ -92,7 +92,7 @@ async function getCommentByTask(req, res, next) {
 async function updateComment(req, res, next) {
     try {
         const userId = req.userId;
-        const commentId = req.body.commentId;
+        const commentId = req.params.commentId;
         const canUpdate = await canModifyComment(commentId, userId);
         if (!canUpdate) {
             res.status(401).json({ message: "Not authorized for this comment" });
@@ -120,7 +120,7 @@ async function updateComment(req, res, next) {
 async function deleteComment(req, res, next) {
     try {
         const userId = req.userId;
-        const commentId = req.body.commentId;
+        const commentId = req.params.commentId;
         const currComment = await Comment.findById(commentId);
 
         const canDelete = await canModifyComment(commentId, userId);

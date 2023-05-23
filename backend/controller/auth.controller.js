@@ -59,7 +59,6 @@ async function signIn(req, res, next) {
     const token = jwt.sign({ id: user._id }, process.env.ACCESS_TOKEN_SECRET);
 
     res.json({
-        id: user._id,
         name: user.name,
         accessToken: token
     });

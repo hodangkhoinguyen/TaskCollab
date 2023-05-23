@@ -34,7 +34,7 @@ async function createGroup(req, res, next) {
 async function getGroupById(req, res, next) {
     try {
         const userId = req.userId;
-        const groupId = req.body.groupId;
+        const groupId = req.params.groupId;
 
         const canView = await canModifyGroup(groupId, userId);
         if (!canView) {
@@ -84,7 +84,7 @@ async function getGroupByUser(req, res, next) {
 async function updateGroup(req, res, next) {
     try {
         const userId = req.userId;
-        const groupId = req.body.groupId;
+        const groupId = req.params.groupId;
 
         const canUpdate = await canModifyGroup(groupId, userId);
         if (!canUpdate) {
@@ -115,7 +115,7 @@ async function updateGroup(req, res, next) {
 async function deleteGroup(req, res, next) {
     try {
         const userId = req.userId;
-        const groupId = req.body.groupId;
+        const groupId = req.params.groupId;
 
         const canDelete = await canModifyGroup(groupId, userId);
         if (!canDelete) {

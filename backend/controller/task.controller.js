@@ -42,7 +42,7 @@ async function createTask(req, res, next) {
 async function getTaskById(req, res, next) {
     try {
         const userId = req.userId;
-        const taskId = req.body.taskId;
+        const taskId = req.params.taskId;
         const canView = await canModifyTask(taskId, userId);
         if (!canView) {
             res.status(401).json({ message: "Not authorized for this task" });
@@ -94,7 +94,7 @@ async function getTaskByGroup(req, res, next) {
 async function updateTask(req, res, next) {
     try {
         const userId = req.userId;
-        const taskId = req.body.taskId;
+        const taskId = req.params.taskId;
         const canUpdate = await canModifyTask(taskId, userId);
         if (!canUpdate) {
             res.status(401).json({ message: "Not authorized for this task" });
@@ -127,7 +127,7 @@ async function updateTask(req, res, next) {
 async function deleteTask(req, res, next) {
     try {
         const userId = req.userId;
-        const taskId = req.body.taskId;
+        const taskId = req.params.taskId;
         const currTask = await Task.findById(taskId);
 
         const canDelete = await canModifyTask(taskId, userId);
