@@ -39,7 +39,7 @@ const handleConfirmPasswordChange = (event) => {
     }
     // Perform signup logic here
     // You can access the entered name, email, and password using the 'name', 'email', and 'password' variables
-    history.push('/main')
+    history.push('/Profile')
   };
 
   return (

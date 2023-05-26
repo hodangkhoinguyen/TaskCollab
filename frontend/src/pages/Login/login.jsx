@@ -58,6 +58,9 @@ const LoginPage = () => {
         <p>Or log in with your Google account:</p>
         <button className="google-login-btn" 
         onClick={handleGoogleLogin}>Log In with Google</button>
+        <p>
+          <a href="/ChangePassword">Forgot Password?</a>
+        </p>
       {/* /<button onClick={handleGoogleLogin}>Log In with Google</button> */}
         <p>Don't have an account? <a href="/signup">Sign up</a></p>
       </div>
