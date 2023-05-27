@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './resetPasswordPage.css'; // Import the CSS file
 
 const ResetPasswordPage = () => {
   const [email, setEmail] = useState('');
@@ -23,9 +24,9 @@ const ResetPasswordPage = () => {
   };
 
   return (
-    <div>
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="reset-container">
+      <h2 className="reset-title">Reset Password</h2>
+      <form className="reset-form" onSubmit={handleSubmit}>
         <div>
           <label>Please enter Email:</label>
           <input

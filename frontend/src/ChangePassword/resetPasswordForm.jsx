@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './resetPasswordForm.css'; // Import the CSS file
+
 
 const PasswordResetForm = () => {
   const [password, setPassword] = useState('');
@@ -34,9 +36,9 @@ const PasswordResetForm = () => {
   };
 
   return (
-    <div>
-      <h2>Reset Password</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="reset-container">
+      <h2 className="reset-title">Reset Password</h2>
+      <form className="reset-form" onSubmit={handleSubmit}>
         <div>
           <label>New Password:</label>
           <input
