@@ -1,0 +1,39 @@
+.ask-email-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 40vh;
+    font-family: Arial, sans-serif;
+  }
+  
+  .ask-email-form {
+    max-width: 400px;
+    padding: 20px;
+    width: 300px;
+  }
+  
+  .ask-email-form h4 {
+    text-align: center;
+    margin-top: 3px ;
+    margin-bottom: 40px;
+  }
+  
+  .ask-email-form label {
+    font-weight: bold;
+  }
+  
+  .ask-email-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+  
+  
+  .ask-email-form p {
+    text-align: center;
+  }
+  
+

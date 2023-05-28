@@ -3,7 +3,9 @@ import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
-
+import Profile from './pages/Profile/profile.jsx';
+import ResetPassword from './pages/ResetPassword/resetPasswordForm.jsx';
+import AskEmail from './pages/AskEmail/askEmail.jsx';
 import { useState, useEffect } from "react";
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
@@ -38,11 +40,14 @@ function App() {
           <Route path="/" element={<Home user={user} login={login} logout={logout} />} />
           <Route path="/login" element={<Login user={user} login={login} logout={logout} />} />
           <Route path="/signup" element={<Signup user={user} login={login} logout={logout} />} />
-
+          <Route path="/profile" element={<Profile user={user} login={login} logout={logout} />} />
+          <Route path="/ResetPassword" element={<ResetPassword user={user} logout={logout} />} />
+          <Route path="/AskEmail" element={<AskEmail user={user} logout={logout} />} />
         </Routes>
       </div>
     </div>
   );
 }
+
 
 export default App;
