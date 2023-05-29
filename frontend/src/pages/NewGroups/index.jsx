@@ -50,10 +50,15 @@ const MakeNewGroup = () => {
             <div className="logo-portion">
                 <h1>TaskHub</h1>
             </div>
+            
             <div className="group-form">
+                <button className="close-button">
+                    &times;
+                </button>
                 <div>
                 <h2>Create New Group</h2>
                 </div>
+                
                 <div>
                     <label>Group Name:</label>
                     <input
@@ -92,7 +97,10 @@ const MakeNewGroup = () => {
                         placeholder="Separate tags with commas"
                     />
                 </div>
-                <button onClick={handleSubmit}>Create Group</button>
+                <div className="go-button">
+                    <button  onClick={handleSubmit}>Create Group</button>
+
+                </div>
 
 
             </div>

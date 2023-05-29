@@ -23,8 +23,9 @@ h1 {
     color: white;
 }
 
-.form-group {
+.group-form {
     margin-bottom: 20px;
+    position: relative;
 }
 
 label {
@@ -51,7 +52,7 @@ input[type="text"]{
     border-color: darkblue;
 }
 
-.group-form button {
+.go-button button {
     margin-top: 1.5%;
     position: absolute;
     left: 46%;
@@ -61,7 +62,7 @@ input[type="text"]{
     border: white;
   }
   
-  .group-form button:before {
+  .go-button button:before {
     content: "";
     width: 25px;
     height: 2px;
@@ -73,12 +74,12 @@ input[type="text"]{
     transition: all 0.3s ease;
   }
   
-  .group-form button:hover:before {
+ .go-button button:hover:before {
     right: 34px;
     width: 35px;
   }
   
-  .group-form button:after {
+  .go-button button:after {
     content: "";
     width: 0;
     height: 0;
@@ -92,8 +93,25 @@ input[type="text"]{
     transition: all 0.3s ease;
   }
   
-  .group-form button:hover:after {
+  .go-button button:hover:after {
     right: 34px;
     right: 30px;
 
   }
+
+.close-button {
+    background-color: transparent;
+    border: 0;
+    font-size:20px;
+    cursor: pointer;
+    position: absolute;
+    right: 18.75%;
+    top: 2px;
+
+}
+
+.close-button:hover{
+    opacity: 0.9;
+    background-color: lightgray;
+}
+
