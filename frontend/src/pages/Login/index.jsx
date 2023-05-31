@@ -30,9 +30,9 @@ const Login = (props) => {
     .then((result) => {
         console.log(result);
         props.login(result);
+        navigate("/");
     })
     .catch(err => console.log(err));
-
   };
 
   const handleGoogleLogin = () => {

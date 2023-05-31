@@ -68,7 +68,13 @@ async function getGroupByUser(req, res, next) {
 
         let result = [];
         for (let id of groupIdList) {
-            result.push(await Group.findById(id));
+            const group = await Group.findById(id);
+            let copyGroup = {
+                ...group._doc
+            };
+            copyGroup["isOwner"] = (userId === group.owner.toString());
+            console.log(copyGroup);
+            result.push(copyGroup);
         }
 
         res.json(result);

@@ -29,7 +29,6 @@ label {
 
 input[type="text"],
 input[type="password"] {
-    width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -94,7 +93,7 @@ input[type="password"] {
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #4caf50;
+    background-color: rgb(64, 180, 226);
     color: white;
     cursor: pointer;
 }

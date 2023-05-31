@@ -1,0 +1,90 @@
+/* profilePage.css */
+
+.profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 60px;
+    background-color: lightgrey;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info {
+    background-color: white;
+    padding: 60px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-info p {
+    margin: 0;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  
+  .loading-message {
+    font-size: 16px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Center the loading spinner */
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+  button.signout-button {
+    padding: 10px 16px;
+    color: #fff;
+    background-color: rgb(64, 180, 226);
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 45px;
+    right: 15px;
+    font-family: 'Arial', sans-serif;
+    font-size: 25px;
+  
+  }
+  
+  button.signout-button:hover {
+    color: lightgrey;
+  }
+  
+/* Additional styles for the TaskHub title */
+.main-header {
+  background-color: rgb(64, 180, 226);
+  padding: 8px 16px;
+  text-align: center;
+  border: 2px solid white;
+  border-radius: 8px 8px 0 0;
+  color:#fff;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-family: cursive;
+  /* text-shadow: 0 0 2px aqua, 0 0 4px aqua;  */
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(64, 180, 226);
+  color: #fff;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: white;
+}
+
