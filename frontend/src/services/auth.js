@@ -11,7 +11,7 @@ async function signup(user) {
 }
 
 async function getInfo(user) {
-    const result = await http.get('auth/getInfo', {}, {
+    const result = await http.get('auth/getInfo', {
         headers: {
             'x-access-token': user.accessToken
         }

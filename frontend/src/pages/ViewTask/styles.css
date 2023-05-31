@@ -1,0 +1,26 @@
+.task-page {
+    background-color: lightblue;
+    color: black;
+    padding: 1em;
+  }
+  
+  .task-form {
+    margin-bottom: 1em;
+  }
+  
+  .task-input {
+    margin-right: 1em;
+  }
+  
+  .task-button {
+    margin-right: 1em;
+  }
+  
+  .task-list {
+    list-style-type: 'none';
+    padding: 0;
+  }
+  
+  .task-item {
+    margin-bottom: 1em;
+  }

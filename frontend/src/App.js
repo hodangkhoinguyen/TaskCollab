@@ -1,8 +1,16 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
+
+import NavBar from './components/NavBar';
+
+import AllGroup from './pages/AllGroup';
 import Login from './pages/Login';
+import NewGroup from './pages/NewGroup';
 import Signup from './pages/Signup';
+import ViewGroup from './pages/ViewGroup';
+import Profile from './pages/Profile';
+import ResetPassword from './pages/ResetPassword';
+import AskEmail from './pages/AskEmail';
 
 import { useState, useEffect } from "react";
 import { useCookies } from 'react-cookie';
@@ -18,6 +26,9 @@ function App() {
     if (currUser) {
       setUser(currUser);
     }
+    else {
+      navigate("/login");
+    }
   }, [cookies.user]);
 
   async function login(user = null) {
@@ -28,17 +39,22 @@ function App() {
   async function logout() {
     setUser(null);
     removeCookie('user');
-    navigate("/");
+    navigate("/login");
   }
 
   return (
     <div className="App">
       <div>
+        <NavBar user={user} login={login} logout={logout} />
         <Routes>
-          <Route path="/" element={<Home user={user} login={login} logout={logout} />} />
+          <Route path="/" element={<Profile user={user} login={login} logout={logout} />} />
+          <Route path="/all-group" element={<AllGroup user={user} login={login} logout={logout} />} />
+          <Route path="/group/:groupId" element={<ViewGroup user={user} login={login} logout={logout} />} />
+          <Route path="/new-group" element={<NewGroup user={user} login={login} logout={logout} />} />
           <Route path="/login" element={<Login user={user} login={login} logout={logout} />} />
           <Route path="/signup" element={<Signup user={user} login={login} logout={logout} />} />
-
+          <Route path="/reset-password" element={<ResetPassword user={user} logout={logout} />} />
+          <Route path="/ask-email" element={<AskEmail user={user} logout={logout} />} />
         </Routes>
       </div>
     </div>
