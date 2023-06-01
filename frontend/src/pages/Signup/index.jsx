@@ -55,6 +55,10 @@ const SignupPage = () => {
   };
 
   return (
+    <div>
+    <header className="main-header">
+        <h1>TaskHub</h1>
+      </header>
     <div className="signup-page">
       <div className="signup-form">
         <h2>Sign Up</h2>
@@ -84,6 +88,7 @@ const SignupPage = () => {
             type="password"
             value={password}
             onChange={handlePasswordChange}
+            placeholder="Password"
             required="required"
           />
         </div>
@@ -93,11 +98,13 @@ const SignupPage = () => {
             type="password"
             value={confirmPassword}
             onChange={handleConfirmPasswordChange}
+            placeholder="Re-enter Password"
             required="required"
           />
         </div>
-        <button onClick={handleSubmit}>Sign Up</button>
+        <button type="submit">Sign Up</button>
       </div>
+    </div>
     </div>
   );
 };

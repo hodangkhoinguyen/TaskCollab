@@ -14,6 +14,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [cookies, setCookie, removeCookie] = useCookies(['tutor-schedule']);
   const navigate = useNavigate();
+  // const passwordResetRoutes = require('./passwordResetRoutes');
 
   useEffect(() => {
     const currUser = cookies.user;
@@ -48,6 +49,8 @@ function App() {
     </div>
   );
 }
+
+// app.use('/api', passwordResetRoutes);
 
 
 export default App;
