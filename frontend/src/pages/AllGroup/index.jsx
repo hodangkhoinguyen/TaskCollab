@@ -1,10 +1,8 @@
 import "./styles.css";
 import group from "../../services/group.js";
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
 function AllGroup(props) {
   const [groups, setGroups] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     // Fetch user data from backend or API
@@ -27,18 +25,16 @@ function AllGroup(props) {
     <div>
       Your Groups
       <div>
-        <Link to="/new-group">Create New Group</Link>
+        <a className="view-group" href="/new-group">Create New Group</a>
         {groups.map((group) => (
-          <div
+          <a
             className="group-item"
             key={group._id}
-            onClick={() => {
-              navigate(`/group/${group._id}`);
-            }}
+            href={`/group/${group._id}`}
           >
             <p className="group-name">{group.name}</p>
             <p className="group-description">{group.description}</p>
-          </div>
+          </a>
         ))}
       </div>
     </div>

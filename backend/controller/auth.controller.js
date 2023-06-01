@@ -60,6 +60,7 @@ async function signIn(req, res, next) {
 
     res.json({
         name: user.name,
+        userId: user._id,
         accessToken: token
     });
 }

@@ -1,5 +1,6 @@
 import db from "../model/index.js";
 import taskCtrl from "./task.controller.js";
+import mongoose from "mongoose";
 
 const Comment = db.comment;
 const Task = db.task;
@@ -68,17 +69,37 @@ async function getCommentByTask(req, res, next) {
             return;
         }
 
-        const commentIdList = (await Task.findById(taskId)).comments;
-        if (!commentIdList) {
-            res.status(401).json({ message: "GroupID is wrong" });
-            return;
-        }
-
-        let result = [];
-        for (let id of commentIdList) {
-            result.push(await Comment.findById(id));
-        }
-
+        let pipeline = [
+            {
+                $match: {
+                    task: new mongoose.Types.ObjectId(taskId)
+                }
+            },
+            {
+                $lookup: {
+                    from: "users",
+                    localField: 'author',
+                    foreignField: "_id",
+                    as: "author",
+                    pipeline: [{
+                        $project: {
+                            "_id": 1,
+                            "name": 1,
+                            "email": 1
+                        }
+                    }]
+                },
+            },
+            {
+                $unwind: "$author"
+            },
+            {
+                $sort: {
+                    dateCreated: -1
+                }
+            }
+        ];
+        let result = await Comment.aggregate(pipeline);
         res.json(result);
     }
     catch (e) {

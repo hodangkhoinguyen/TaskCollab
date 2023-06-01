@@ -73,7 +73,6 @@ async function getGroupByUser(req, res, next) {
                 ...group._doc
             };
             copyGroup["isOwner"] = (userId === group.owner.toString());
-            console.log(copyGroup);
             result.push(copyGroup);
         }
 
@@ -128,7 +127,6 @@ async function deleteGroup(req, res, next) {
             res.status(401).json({ message: "Not authorized for this group" });
             return;
         }
-        console.log("a")
         await Group.findByIdAndDelete(groupId);
         await User.findByIdAndUpdate(userId, { $pull: { groups: groupId, ownerGroups: groupId } });
 

@@ -6,6 +6,8 @@ import NavBar from './components/NavBar';
 import AllGroup from './pages/AllGroup';
 import Login from './pages/Login';
 import NewGroup from './pages/NewGroup';
+import ManageUser from './pages/ManageUser';
+
 import Signup from './pages/Signup';
 import ViewGroup from './pages/ViewGroup';
 import Profile from './pages/Profile';
@@ -48,11 +50,17 @@ function App() {
         <NavBar user={user} login={login} logout={logout} />
         <Routes>
           <Route path="/" element={<Profile user={user} login={login} logout={logout} />} />
+          <Route path="/login" element={<Login user={user} login={login} logout={logout} />} />
+          <Route path="/signup" element={<Signup user={user} login={login} logout={logout} />} />
+
           <Route path="/all-group" element={<AllGroup user={user} login={login} logout={logout} />} />
           <Route path="/group/:groupId" element={<ViewGroup user={user} login={login} logout={logout} />} />
           <Route path="/new-group" element={<NewGroup user={user} login={login} logout={logout} />} />
-          <Route path="/login" element={<Login user={user} login={login} logout={logout} />} />
-          <Route path="/signup" element={<Signup user={user} login={login} logout={logout} />} />
+          <Route path="/group/:groupId/manage-user" element={<ManageUser user={user} login={login} logout={logout} />} />
+
+          <Route path="/task/:taskId" element={<ViewGroup user={user} login={login} logout={logout} />} />
+          <Route path="/new-task" element={<NewGroup user={user} login={login} logout={logout} />} />
+
           <Route path="/reset-password" element={<ResetPassword user={user} logout={logout} />} />
           <Route path="/ask-email" element={<AskEmail user={user} logout={logout} />} />
         </Routes>

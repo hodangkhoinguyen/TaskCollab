@@ -88,3 +88,14 @@ button[type="submit"]:hover {
   background-color: white;
 }
 
+.view-group {
+  background-color: rgb(64, 180, 226);
+  color: white;
+  text-decoration: none;
+  display: block;
+  border: solid black 1px;
+  border-radius: 5px;
+  width: 10rem;
+  padding: 0.5rem;
+  margin: auto;
+}

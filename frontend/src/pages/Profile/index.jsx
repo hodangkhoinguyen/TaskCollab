@@ -29,6 +29,7 @@ const ProfilePage = (props) => {
         <div className="profile-info">
           <p>Name: {user.name}</p>
           <p>Email: {user.email}</p>
+          <a className="view-group" href="/all-group">View Your Group</a>
         </div>
       ) : (
         <div className="loading-spinner">

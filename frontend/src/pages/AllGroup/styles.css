@@ -1,10 +1,13 @@
 .group-item {
+    text-decoration: none;
+    display: block;
     border: solid black 2px;
     margin: 2rem auto;
     height: fit-content;
     width: 20rem;
     border-radius: 10px;
     cursor: pointer;
+    color: black;
 }
 
 .group-item:hover {
@@ -13,6 +16,7 @@
 
 .group-name {
     font-size: 1.25rem;
+    font-weight: bold;
 }
 
 .group-description {
