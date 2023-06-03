@@ -1,5 +1,6 @@
 import db from "../model/index.js";
 import mongoose from "mongoose";
+import mailer from "./mailer.js";
 
 const User = db.user;
 const Group = db.group;
@@ -140,6 +141,38 @@ async function deleteGroup(req, res, next) {
     }
 }
 
+async function getMembers(req, res, next) {
+    try {
+        const userId = req.userId;
+        const groupId = req.params.groupId;
+
+        const canUpdate = await canModifyGroup(groupId, userId);
+        if (!canUpdate) {
+            res.status(401).json({ message: "Not authorized for this group" });
+            return;
+        }
+
+        const group = await Group.findById(groupId);
+        let result = [];
+        for (let memberId of group.members) {
+            let member = await User.findById(memberId);
+            result.push({
+                name: member.name,
+                email: member.email,
+                userId: memberId
+            });
+        }
+
+        res.json(result);
+    }
+    catch (e) {
+        res.status(500).json({
+            error: e.message,
+            message: "Cannot add member"
+        });
+    }
+}
+
 async function addMemberByEmail(req, res, next) {
     try {
         const userId = req.userId;
@@ -158,7 +191,8 @@ async function addMemberByEmail(req, res, next) {
             res.status(401).json({ message: "Not authorized for this group" });
             return;
         }
-
+        const group = await Group.findById(groupId);
+        const owner = await User.findById(userId);
         await Group.findByIdAndUpdate(groupId, {
             $push: {
                 members: user._id
@@ -169,12 +203,56 @@ async function addMemberByEmail(req, res, next) {
                 groups: groupId
             }
         });
+        await mailer(req.body.email, `You're Added to ${group.name}` , `${owner.name} (${owner.email}) has added you to the group named ${group.name}`);
+
         res.json({ message: "Add member successfully" });
+    }
+    catch (e) {
+        console.log(e);
+        res.status(500).json({
+            error: e.message,
+            message: "Cannot add member"
+        });
+    }
+}
+
+async function removeMemberByEmail(req, res, next) {
+    try {
+        const userId = req.userId;
+        const groupId = req.body.groupId;
+        const user = await User.findOne({
+            email: req.body.email
+        });
+
+        if (!user) {
+            res.status(400).send({ message: "No user found!" });
+            return;
+        }
+
+        const canUpdate = await canModifyGroup(groupId, userId);
+        if (!canUpdate) {
+            res.status(401).json({ message: "Not authorized for this group" });
+            return;
+        }
+        const group = await Group.findById(groupId);
+        const owner = await User.findById(userId);
+        await Group.findByIdAndUpdate(groupId, {
+            $pull: {
+                members: user._id
+            }
+        });
+        await User.findByIdAndUpdate(user._id, {
+            $pull: {
+                groups: groupId
+            }
+        });
+        await mailer(req.body.email, `You're Removed from ${group.name}` , `${owner.name} (${owner.email}) has removed you from the group named ${group.name}`);
+        res.json({ message: "Remove member successfully" });
     }
     catch (e) {
         res.status(500).json({
             error: e.message,
-            message: "Cannot add member"
+            message: "Cannot remove member"
         });
     }
 }
@@ -196,6 +274,8 @@ const groupCtrl = {
     updateGroup,
     deleteGroup,
     addMemberByEmail,
+    getMembers,
+    removeMemberByEmail,
     canModifyGroup
 }
 

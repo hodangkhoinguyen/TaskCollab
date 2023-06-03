@@ -35,6 +35,11 @@
     border: solid black 1px;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 1rem;
+}
+
+a.new-task-btn {
+    text-decoration: none;
 }
 
 .modal-container {
@@ -80,7 +85,7 @@
 
 .task-item:hover {
     background-color: rgb(64, 180, 226);
-    color: white
+    color: white;
 }
 
 .task-title {

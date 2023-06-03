@@ -80,7 +80,11 @@ async function getTaskByGroup(req, res, next) {
         for (let id of taskIdList) {
             result.push(await Task.findById(id));
         }
-
+        result.sort(function(a,b){
+            // Turn your strings into dates, and then subtract them
+            // to get a value that is either negative, positive, or zero.
+            return new Date(b.dateCreated) - new Date(a.dateCreated);
+          });
         res.json(result);
     }
     catch (e) {

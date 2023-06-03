@@ -23,7 +23,7 @@ function AllGroup(props) {
 
   return (
     <div>
-      Your Groups
+      <h2>Your Groups</h2>
       <div>
         <a className="view-group" href="/new-group">Create New Group</a>
         {groups.map((group) => (

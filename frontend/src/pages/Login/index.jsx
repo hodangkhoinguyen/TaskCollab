@@ -35,10 +35,6 @@ const Login = (props) => {
     .catch(err => console.log(err));
   };
 
-  const handleGoogleLogin = () => {
-    // perform Google login logic here
-  };
-
   return (
     <div className="login-page">
       <div className="login-form">
@@ -64,11 +60,6 @@ const Login = (props) => {
           />
         </div>
         <button onClick={handleSubmit}>Login</button>
-        <p>Or log in with your Google account:</p>
-        <button className="google-login-btn" onClick={handleGoogleLogin}>
-          Log In with Google
-        </button>
-        {/* /<button onClick={handleGoogleLogin}>Log In with Google</button> */}
         <p>
           Don't have an account? <a href="/signup">Sign up</a>
         </p>

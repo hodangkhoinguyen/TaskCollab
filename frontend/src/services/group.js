@@ -45,12 +45,52 @@ async function getGroupByUser(user) {
     return result.data;
 }
 
+async function getMembers(user, groupId) {
+    const result = await http.get(`group/getMembers/${groupId}`, {
+        headers: {
+            'x-access-token': user.accessToken
+        }
+    });
+    return result.data;
+}
+
+async function addMemberByEmail(user, groupId, email) {
+    const result = await http.post(`group/addMemberByEmail`, 
+    {
+        groupId: groupId,
+        email: email
+    },
+    {
+        headers: {
+            'x-access-token': user.accessToken
+        }
+    });
+    return result.data;
+}
+
+async function removeMemberByEmail(user, groupId, email) {
+    const result = await http.post(`group/removeMemberByEmail`, 
+    {
+        groupId: groupId,
+        email: email
+    },
+    {
+        headers: {
+            'x-access-token': user.accessToken
+        }
+    });
+    return result.data;
+}
+
 const group = {
     createGroup,
     updateGroup,
     deleteGroup,
     getGroupById,
-    getGroupByUser
+    getGroupByUser,
+    getMembers,
+    addMemberByEmail,
+    removeMemberByEmail
 };
 
 export default group;

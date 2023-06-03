@@ -1,0 +1,64 @@
+/* Additional styles for the TaskHub title */
+.main-header {
+    background-color: rgb(64, 180, 226);
+    padding-left: 3rem;
+    text-align: center;
+    border: 2px solid white;
+    border-radius: 8px 8px 0 0;
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 4rem;
+    font-family: cursive;
+    height: 4rem;
+    /* text-shadow: 0 0 2px aqua, 0 0 4px aqua;  */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.left-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 2rem;
+}
+
+.link-container a {
+    text-decoration: none;
+    color: white;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+.link-container a:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+.signout-button {
+    padding: 10px 16px;
+    color: #fff;
+    background-color: rgb(64, 180, 226);
+    border: none;
+    cursor: pointer;
+    font-size: 25px;
+    height: 100%;
+    margin-right: 1rem;
+  }
+  
+  button.signout-button:hover {
+    background-color: rgba(0, 0, 0, 0.4);
+  }

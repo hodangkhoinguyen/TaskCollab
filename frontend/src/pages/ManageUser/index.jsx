@@ -2,18 +2,106 @@ import "./styles.css";
 import group from "../../services/group.js";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import task from "../../services/task.js";
-import commentCtrl from "../../services/comment.js";
+
+function AddUser(props) {
+  const [email, setEmail] = useState("");
+
+  if (!props.show) {
+    return null;
+  }
+
+  function handleEmailChange(e) {
+    setEmail(e.target.value);
+  }
+  function handleAddMember() {
+    if (email === "") {
+      alert("Please fill out information");
+      return;
+    }
+
+    group.addMemberByEmail(props.user, props.groupId, email)
+      .then(() => {
+        props.setShowNewMember(false);
+        props.updateMemberList();
+      })
+      .catch((err) => console.log(err));
+  }
+
+  return (
+    <div className="modal-container">
+      <div className="new-task-container">
+        <h5>Add New User</h5>
+        <label>Title:</label>
+        <input
+          type="text"
+          onChange={handleEmailChange}
+          placeholder="New Member Email"
+          required="required"
+        />
+        <div>
+          <button className="create-task-btn" onClick={handleAddMember}>
+            Add
+          </button>
+          <button
+            onClick={() => {
+              props.setShowNewMember(false);
+            }}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function RemoveUser(props) {
+  if (!props.show) {
+    return null;
+  }
+
+  const member = props.member;
+  function handleRemoveMember() {
+    group.removeMemberByEmail(props.user, props.groupId, member.email)
+    .then( () => {
+      props.setShowRemoveMember(false);
+      props.updateMemberList();
+    }
+    )
+    .catch(e => console.log(e));
+  }
+
+  return (
+    <div className="modal-container">
+      <div className="new-task-container">
+        <h5>Remove User</h5>
+        <label>Are you sure to remove {member.name}:</label>
+        <div>
+          <button className="remove-user-btn" onClick={handleRemoveMember}>
+            Yes
+          </button>
+          <button className="remove-user-btn"
+            onClick={() => {
+              props.setShowRemoveMember(false);
+            }}
+          >
+            No
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 
-function ViewGroup(props) {
+
+function ViewUser(props) {
   let params = useParams();
   const [groupInfo, setGroupInfo] = useState(null);
-  const [showNewTask, setShowNewTask] = useState(false);
-  const [taskList, setTaskList] = useState([]);
-  const [currentTask, setCurrentTask] = useState(null);
-  const [taskId, setTaskId] = useState(null);
-  const [commentList, setCommentList] = useState([]);
+  const [showNewMember, setShowNewMember] = useState(false);
+  const [showRemoveMember, setShowRemoveMember] = useState(false);
+  const [removedMember, setRemovedMember] = useState(null);
+  const [memberList, setMemberList] = useState([]);
 
   useEffect(() => {
     // Fetch user data from backend or API
@@ -22,13 +110,10 @@ function ViewGroup(props) {
       if (!props.user) return;
       try {
         const getGroups = await group.getGroupById(props.user, params.groupId);
-        const getTaskList = await task.getTaskByGroup(
-          props.user,
-          params.groupId
-        );
-
+        const getMemberList = await group.getMembers(props.user, params.groupId);
+        console.log(getMemberList)
         setGroupInfo(getGroups);
-        setTaskList(getTaskList);
+        setMemberList(getMemberList);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -37,75 +122,64 @@ function ViewGroup(props) {
     fetchGroupData();
   }, [props.user, params.groupId]);
 
-  useEffect(() => {
-    const fetchTaskData = async () => {
-      if (!props.user || !taskId) return;
-      const taskDetail = await task.getTaskById(props.user, taskId);
-      const getCommentList = await commentCtrl.getCommentByTask(
-        props.user,
-        taskId
-      );
-
-      setCurrentTask(taskDetail);
-      setCommentList(getCommentList);
-    };
-
-    fetchTaskData();
-  }, [props.user, taskId]);
-
-  useEffect(() => {
-
-  }, [commentList]);
-
-  async function updateTaskList() {
-    const getTaskList = await task.getTaskByGroup(props.user, params.groupId);
-    setTaskList(getTaskList);
+  async function updateMemberList() {
+    const getMemberList = await group.getMembers(props.user, params.groupId);
+    setMemberList(getMemberList);
   }
 
-  function displayNewTask() {
-    setShowNewTask(true);
+  function displayNewMember() {
+    setShowNewMember(true);
+  }
+
+  function handleRemoveUser(member) {
+    setRemovedMember(member);
+    setShowRemoveMember(true);
   }
 
   return groupInfo ? (
     <div>
       Group {groupInfo.name}
       <div className="new-task-btn-container">
-        <button className="new-task-btn" onClick={displayNewTask}>
-          Create New Task
+        <button className="new-task-btn" onClick={displayNewMember}>
+          Add New User
         </button>
-        <a className="new-task-btn" href={`/group/${params.groupId}/manage-user`}>
-          Manage User
-        </a>
       </div>
       <div className="group-container">
         <div className="task-container">
-          {taskList || taskList.length > 0 ? (
+          {memberList || memberList.length > 0 ? (
             <div>
-              {taskList.map((task) => (
-                <button
-                  className="task-item"
-                  key={task._id}
-                  onClick={() => setTaskId(task._id)}
+              {memberList.map((member) => (
+                <div
+                  className="user-item"
+                  key={member.memberId}
                 >
-                  <p className="task-title">{task.title}</p>
-                  <p className="task-description">
-                    Description: {task.description}
-                  </p>
-                </button>
+                  <p className="member-title">{member.name}</p>
+                  <p className="member-title">{member.email}</p>
+                  <button className="remove-button" onClick={() => {
+                    handleRemoveUser(member);
+                  }}>X</button>
+                </div>
               ))}
             </div>
           ) : (
-            <div>There is currently no task</div>
+            <div>There is currently no member</div>
           )}
         </div>
-        <TaskDetail setCommentList={setCommentList} taskDetail={currentTask} commentList={commentList} {...props}/>
       </div>
-      <AddTask
+      <AddUser
         groupId={params.groupId}
-        updateTaskList={updateTaskList}
+        updateMemberList={updateMemberList}
         user={props.user}
-        setShowNewTask={setShowNewTask}
-        show={showNewTask}
+        setShowNewMember={setShowNewMember}
+        show={showNewMember}
+      />
+      <RemoveUser
+        groupId={params.groupId}
+        updateMemberList={updateMemberList}
+        user={props.user}
+        member={removedMember}
+        setShowRemoveMember={setShowRemoveMember}
+        show={showRemoveMember}
       />
     </div>
   ) : (
@@ -113,4 +187,4 @@ function ViewGroup(props) {
   );
 }
 
-export default ViewGroup;
+export default ViewUser;
